@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MediaViewController.swift
 //  TMDb app
 //
 //  Created by admin on 01.08.2021.
@@ -9,21 +9,66 @@ import UIKit
 import Alamofire
 import RealmSwift
 
-class ViewController: UIViewController {
+class MediaViewController: UIViewController {
+    
     
     let realm = try? Realm()
     
     @IBOutlet weak var tableView: UITableView!
     
+
+
+       //MARK:- Add launchScreen animation
+    
+    private let imageView: UIImageView = {
+           let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 500, height: 500))
+           imageView.image = UIImage(named: "logo")
+           return imageView
+       }()
+       
+       override func viewDidLayoutSubviews() {
+           super.viewDidLayoutSubviews()
+           imageView.center = view.center
+           launchScreenAnimate()
+           
+           DispatchQueue.main.asyncAfter(deadline: .now()+0.7, execute: {
+               self.launchScreenAnimate()
+           })
+       }
+       
+       private func launchScreenAnimate() {
+           UIView.animate(withDuration: 0.8, animations: {
+               let size = self.view.frame.size.width * 20
+               let diffX = size - self.view.frame.size.width
+               let diffY = self.view.frame.size.height - size
+               
+               self.imageView.frame = CGRect(
+                   x: -(diffX/2),
+                   y: diffY/2,
+                   width: size,
+                   height: size
+               )
+               
+               self.imageView.alpha = 0
+           })
+       }
+    
     var tvShows: [TvShow] = []
+    
+    
+    //MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.addSubview(imageView)
         
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         
         
     }
+ 
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -31,6 +76,8 @@ class ViewController: UIViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = false
         self.requestTrendingTvShows()
     }
+    
+    //MARK: - Methods
     
     func requestTrendingTvShows() {
         
@@ -48,7 +95,7 @@ class ViewController: UIViewController {
     
 }
 
-extension ViewController: UITableViewDataSource{
+extension MediaViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.tvShows.count
@@ -61,7 +108,7 @@ extension ViewController: UITableViewDataSource{
     }
 }
 
-extension ViewController: UITableViewDelegate {
+extension MediaViewController: UITableViewDelegate {
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
