@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		069D409956AC5152E01FB933 /* Pods_TMDb_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 276D33FFB56434AA5F827485 /* Pods_TMDb_app.framework */; };
+		843BF34126F789E70063E56A /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843BF33F26F789E70063E56A /* MovieTableViewCell.swift */; };
+		843BF34226F789E70063E56A /* MovieTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 843BF34026F789E70063E56A /* MovieTableViewCell.xib */; };
+		843BF34626F78D040063E56A /* TVShowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843BF34426F78D040063E56A /* TVShowTableViewCell.swift */; };
+		843BF34726F78D040063E56A /* TVShowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 843BF34526F78D040063E56A /* TVShowTableViewCell.xib */; };
+		843BF34926F793F00063E56A /* Constans.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843BF34826F793F00063E56A /* Constans.swift */; };
+		843BF34B26F8FE4B0063E56A /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843BF34A26F8FE4B0063E56A /* GradientView.swift */; };
 		8442728126B6D75C000E8320 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8442728026B6D75C000E8320 /* Main.storyboard */; };
 		8442728526B6D7D7000E8320 /* TvShowDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8442728426B6D7D7000E8320 /* TvShowDetailViewController.swift */; };
 		8442728726B6D83C000E8320 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 8442728626B6D83C000E8320 /* Podfile */; };
@@ -30,6 +36,12 @@
 
 /* Begin PBXFileReference section */
 		276D33FFB56434AA5F827485 /* Pods_TMDb_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TMDb_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		843BF33F26F789E70063E56A /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
+		843BF34026F789E70063E56A /* MovieTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieTableViewCell.xib; sourceTree = "<group>"; };
+		843BF34426F78D040063E56A /* TVShowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowTableViewCell.swift; sourceTree = "<group>"; };
+		843BF34526F78D040063E56A /* TVShowTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TVShowTableViewCell.xib; sourceTree = "<group>"; };
+		843BF34826F793F00063E56A /* Constans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constans.swift; sourceTree = "<group>"; };
+		843BF34A26F8FE4B0063E56A /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		8442728026B6D75C000E8320 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		8442728426B6D7D7000E8320 /* TvShowDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvShowDetailViewController.swift; sourceTree = "<group>"; };
 		8442728626B6D83C000E8320 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -72,6 +84,33 @@
 				276D33FFB56434AA5F827485 /* Pods_TMDb_app.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		843BF33D26F789990063E56A /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				843BF34326F78CC30063E56A /* TVShowCell */,
+				843BF33E26F789AB0063E56A /* MovieCell */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		843BF33E26F789AB0063E56A /* MovieCell */ = {
+			isa = PBXGroup;
+			children = (
+				843BF33F26F789E70063E56A /* MovieTableViewCell.swift */,
+				843BF34026F789E70063E56A /* MovieTableViewCell.xib */,
+			);
+			path = MovieCell;
+			sourceTree = "<group>";
+		};
+		843BF34326F78CC30063E56A /* TVShowCell */ = {
+			isa = PBXGroup;
+			children = (
+				843BF34426F78D040063E56A /* TVShowTableViewCell.swift */,
+				843BF34526F78D040063E56A /* TVShowTableViewCell.xib */,
+			);
+			path = TVShowCell;
 			sourceTree = "<group>";
 		};
 		84EBEB9226B6D38D00BF44EB = {
@@ -119,7 +158,6 @@
 		84EBEBB326B6D46B00BF44EB /* NetworkModels */ = {
 			isa = PBXGroup;
 			children = (
-				84EBEBB626B6D48F00BF44EB /* Actors */,
 				84EBEBB526B6D48400BF44EB /* TVShows */,
 				84EBEBB426B6D47C00BF44EB /* Movies */,
 			);
@@ -144,13 +182,6 @@
 			path = TVShows;
 			sourceTree = "<group>";
 		};
-		84EBEBB626B6D48F00BF44EB /* Actors */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Actors;
-			sourceTree = "<group>";
-		};
 		84EBEBB826B6D4AB00BF44EB /* RealmModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -161,6 +192,7 @@
 		84EBEBB926B6D4C800BF44EB /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				843BF33D26F789990063E56A /* Cells */,
 				84EBEBA226B6D38D00BF44EB /* MediaViewController.swift */,
 				8442728426B6D7D7000E8320 /* TvShowDetailViewController.swift */,
 				846622F226B9CA3C004758CA /* WatchTvShowLaterViewController.swift */,
@@ -178,6 +210,8 @@
 				84EBEBA026B6D38D00BF44EB /* SceneDelegate.swift */,
 				84EBEBA726B6D38F00BF44EB /* Assets.xcassets */,
 				84EBEBA926B6D38F00BF44EB /* LaunchScreen.storyboard */,
+				843BF34826F793F00063E56A /* Constans.swift */,
+				843BF34A26F8FE4B0063E56A /* GradientView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -251,6 +285,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				84EBEBAB26B6D38F00BF44EB /* LaunchScreen.storyboard in Resources */,
+				843BF34226F789E70063E56A /* MovieTableViewCell.xib in Resources */,
+				843BF34726F78D040063E56A /* TVShowTableViewCell.xib in Resources */,
 				84EBEBA826B6D38F00BF44EB /* Assets.xcassets in Resources */,
 				8442728726B6D83C000E8320 /* Podfile in Resources */,
 				8442728126B6D75C000E8320 /* Main.storyboard in Resources */,
@@ -308,13 +344,17 @@
 			files = (
 				8442728526B6D7D7000E8320 /* TvShowDetailViewController.swift in Sources */,
 				846622F126B95320004758CA /* WatchMovieLaterViewController.swift in Sources */,
+				843BF34626F78D040063E56A /* TVShowTableViewCell.swift in Sources */,
 				846622F326B9CA3C004758CA /* WatchTvShowLaterViewController.swift in Sources */,
 				8442728B26B6DA3F000E8320 /* PopularTvShowResult.swift in Sources */,
 				84EBEBC226B6D6D100BF44EB /* Movie.swift in Sources */,
+				843BF34126F789E70063E56A /* MovieTableViewCell.swift in Sources */,
 				8442728A26B6DA3F000E8320 /* TvShows.swift in Sources */,
+				843BF34B26F8FE4B0063E56A /* GradientView.swift in Sources */,
 				8442729D26B6DF28000E8320 /* MovieRealm.swift in Sources */,
 				84EBEBA326B6D38D00BF44EB /* MediaViewController.swift in Sources */,
 				8442729926B6DBB5000E8320 /* MovieViewController.swift in Sources */,
+				843BF34926F793F00063E56A /* Constans.swift in Sources */,
 				8442729B26B6DC21000E8320 /* MovieDetailViewController.swift in Sources */,
 				844272C326B71AAF000E8320 /* TvShowRealm.swift in Sources */,
 				84EBEB9F26B6D38D00BF44EB /* AppDelegate.swift in Sources */,
@@ -460,6 +500,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VVT5US76Z7;
 				INFOPLIST_FILE = "TMDb app/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -479,6 +520,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VVT5US76Z7;
 				INFOPLIST_FILE = "TMDb app/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

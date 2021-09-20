@@ -11,7 +11,6 @@
         <!--Tab Bar Controller-->
         <scene sceneID="jIl-U4-Owl">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nRg-OQ-u1G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tabBarController id="jm2-t8-eWB" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="b66-9Y-foD">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -23,6 +22,7 @@
                         <segue destination="4D4-P7-OXr" kind="relationship" relationship="viewControllers" id="YbH-kF-ixZ"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nRg-OQ-u1G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="620" y="203"/>
         </scene>
@@ -117,6 +117,9 @@
                                     <segment title="Movies"/>
                                     <segment title="TVShows"/>
                                 </segments>
+                                <connections>
+                                    <action selector="mediaSegmentedChanged:" destination="rOF-OY-i2M" eventType="valueChanged" id="QXh-5P-4wC"/>
+                                </connections>
                             </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="0R1-73-qSa"/>
@@ -133,6 +136,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Bto-7G-xXM"/>
                     <connections>
+                        <outlet property="mediaSegmentedControl" destination="qth-1K-IhS" id="vJo-SA-sRi"/>
                         <outlet property="tableView" destination="j9p-qh-Wtx" id="1Rj-Vs-lr2"/>
                     </connections>
                 </viewController>
@@ -166,6 +170,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jr0-cQ-IXE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3052.1739130434785" y="-204.24107142857142"/>
+        </scene>
+        <!--Tv Show Detail View Controller-->
+        <scene sceneID="p53-kx-KWf">
+            <objects>
+                <viewController storyboardIdentifier="TvShowDetailViewController" id="7S1-Km-dIl" customClass="TvShowDetailViewController" customModule="TMDb_app" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dJE-b9-GFB">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="dhc-DU-7ED"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g9i-eF-dbK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3770" y="-209"/>
         </scene>
     </scenes>
     <resources>
