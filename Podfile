@@ -7,5 +7,6 @@ target 'TMDb app' do
   pod 'Alamofire'
   pod 'SDWebImage'
   pod 'RealmSwift'
+  pod "youtube-ios-player-helper"
 
 end

@@ -9,6 +9,7 @@ import UIKit
 import SDWebImage
 import RealmSwift
 import Alamofire
+import youtube_ios_player_helper
 
 
 class TvShowDetailViewController: UIViewController {
@@ -16,10 +17,11 @@ class TvShowDetailViewController: UIViewController {
     let realm = try? Realm()
     
     @IBOutlet weak var posterImageView: UIImageView!
-    @IBOutlet weak var tvShowLanguage: UILabel!
     @IBOutlet weak var releaseDateLabel: UILabel!
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var overviewLabel: UILabel!
+    @IBOutlet weak var tvLanguageLabel: UILabel!
+    @IBOutlet weak var videoPlayerView: YTPlayerView!
     
     
     var tvShow: TvShow? = nil
@@ -29,50 +31,48 @@ class TvShowDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         self.title = self.tvShow?.name
         self.navigationController?.navigationBar.prefersLargeTitles = false
         
-        if let id = self.tvShow?.id{
-            let stringId = String (describing: id)
-            self.requestTrailerVideo(with: stringId)
+        if let id = self.tvShow?.id {
+            let stringID = String(describing: id)
+            self.requestVideos(with: stringID)
         }
         
         if let posterPath = self.tvShow?.posterPath {
             let urlString = self.imageUrlFirstPart + posterPath
             self.posterImageView.sd_setImage(with: URL(string: urlString), completed: nil)
         }
+    
+        self.overviewLabel.text = self.tvShow?.overview
+        self.tvLanguageLabel.text = tvShow?.originalLanguage
+        self.releaseDateLabel.text = self.tvShow?.firstAirDate
         
-        if let voteAvarage = self.tvShow?.voteAverage {
-            let someString: String = String(voteAvarage)
-            self.ratingLabel.text = "Vote Average: " + someString
+        if let tvShow = self.tvShow {
+            if let vote = tvShow.voteAverage {
+                self.ratingLabel.text = String(describing: vote)
+            }
         }
-        
-        if let tvShowLanguage = self.tvShow?.originalLanguage {
-            let someStringForLanguage: String = String(tvShowLanguage)
-            self.tvShowLanguage.text = "Language: " + someStringForLanguage
-        }
-        
-        if let releaseDateLabel = self.tvShow?.firstAirDate {
-            let stringFOrReleaseDateLabel: String = String(releaseDateLabel)
-            self.releaseDateLabel.text = "Release Date: " + stringFOrReleaseDateLabel
-        }
-        
-        if let overviewLabel = self.tvShow?.overview {
-            let stringFOrOverview: String = String(overviewLabel)
-            self.overviewLabel.text = "Overview: " + stringFOrOverview
-        }
-        
         let addToWatchLaterBarButtonItem = UIBarButtonItem(title: "Watch Later", style: .done, target: self, action: #selector(addToWatchButtonPressed))
         self.navigationItem.rightBarButtonItem = addToWatchLaterBarButtonItem
     }
-    func requestTrailerVideo(with id: String) {
-        let url =    "https://api.themoviedb.org/3/tv/\(self.tvShow?.id)/videos?api_key=32ea20e318793cf10469df41ffe5990d&language=en-US"
+    
+  
+    
+    func requestVideos(with id: String) {
+        
+        let url = "\(Constants.network.tvShowPath)\(id)\(Constants.network.keyForVideos)"
+        
         AF.request(url).responseJSON { responce in
-                let decoder = JSONDecoder()
-                if let data = try? decoder.decode(PopularTvShowResult.self, from: responce.data!) {
-//                    self.tvShows = data.tvShows ?? []
-//                    self.tableView.reloadData()
-                }
+            
+            let decoder = JSONDecoder()
+            guard let data = responce.data else { return }
+            
+            if let data = try? decoder.decode(Trailers.self, from: data) {
+                guard let id = data.results?.first?.key else { return }
+                self.videoPlayerView.load(withVideoId: id)
+            }
         }
     }
     
