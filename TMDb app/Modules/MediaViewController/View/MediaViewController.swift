@@ -6,19 +6,13 @@
 //
 
 import UIKit
-import Alamofire
-import RealmSwift
 
 class MediaViewController: UIViewController {
     
-    
-    let realm = try? Realm()
+    var viewModel: MediaViewModel = MediaViewModel()
     
     @IBOutlet weak var mediaSegmentedControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
-    
-    var tvShows: [TvShow] = []
-    var movies: [Movie] = []
     
     
     //MARK: - Life cycle
@@ -28,30 +22,24 @@ class MediaViewController: UIViewController {
         
         view.addSubview(imageView)
         
-        let movieTableViewCellIdentifier = String(describing: MovieTableViewCell.self)
-        self.tableView.register(UINib(nibName: movieTableViewCellIdentifier, bundle: nil),
-                                forCellReuseIdentifier: movieTableViewCellIdentifier)
-        
-        let tvTableViewCellIdentifier = String(describing: TVShowTableViewCell.self)
-        self.tableView.register(UINib(nibName: tvTableViewCellIdentifier, bundle: nil),
-                                forCellReuseIdentifier: tvTableViewCellIdentifier)
-        
-        
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-        
-        
-        self.title = "Media"
-        self.navigationController?.navigationBar.prefersLargeTitles = false
+        self.setupUI()
         
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        
+        self.viewModel.loadMovies(completion: {
+            self.tableView.reloadData()
+        })
+        
+        self.viewModel.loadTvShows(completion: {
+                   self.tableView.reloadData()
+               })
+        
         self.navigationController?.navigationBar.prefersLargeTitles = false
-        self.requestTrendingTvShows()
-        self.requestTrendingMovies()
+       
     }
     
     
@@ -59,7 +47,7 @@ class MediaViewController: UIViewController {
     
     private let imageView: UIImageView = {
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 500, height: 500))
-        imageView.image = UIImage(named: "logo")
+        imageView.image = UIImage(named: Constants.ui.imageView)
         return imageView
     }()
     
@@ -90,37 +78,24 @@ class MediaViewController: UIViewController {
         })
     }
     
-    
-    //MARK: - Methods
-    
-    func requestTrendingTvShows() {
+    func setupUI() {
         
-        let url = "https://api.themoviedb.org/3/trending/tv/week?api_key=32ea20e318793cf10469df41ffe5990d"
-        AF.request(url).responseJSON { responce in
-            let decoder = JSONDecoder()
-            if let data = try? decoder.decode(PopularTvShowResult.self, from: responce.data!) {
-                self.tvShows = data.tvShows ?? []
-                self.tableView.reloadData()
-                
-            }
-        }
+        let movieTableViewCellIdentifier = String(describing: MovieTableViewCell.self)
+        self.tableView.register(UINib(nibName: movieTableViewCellIdentifier, bundle: nil),
+                                forCellReuseIdentifier: movieTableViewCellIdentifier)
+        
+        let tvTableViewCellIdentifier = String(describing: TVShowTableViewCell.self)
+        self.tableView.register(UINib(nibName: tvTableViewCellIdentifier, bundle: nil),
+                                forCellReuseIdentifier: tvTableViewCellIdentifier)
+        
+        
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: Constants.ui.defaultCellIdentifier)
+        
+        
+        self.title = Constants.viewControllerTitles.media
+        self.navigationController?.navigationBar.prefersLargeTitles = false
+        
     }
-    func requestTrendingMovies() {
-        
-        let url = "https://api.themoviedb.org/3/trending/movie/week?api_key=32ea20e318793cf10469df41ffe5990d"
-        
-        
-        AF.request(url).responseJSON { responce in
-            
-            let decoder = JSONDecoder()
-            
-            if let data = try? decoder.decode(PopularMovieResult.self, from: responce.data!) {
-                self.movies = data.movies ?? []
-                self.tableView.reloadData()
-            }
-        }
-    }
-    
 }
 
 extension MediaViewController: UITableViewDataSource{
@@ -130,9 +105,9 @@ extension MediaViewController: UITableViewDataSource{
         switch selectedIndex
         {
         case 0:
-            return self.movies.count
+            return self.viewModel.movies.count
         case 1:
-            return self.tvShows.count
+            return self.viewModel.tvShows.count
         default:
             return 0
         }
@@ -151,10 +126,10 @@ extension MediaViewController: UITableViewDataSource{
             let cellIdentifier = String(describing: MovieTableViewCell.self)
             let movieCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! MovieTableViewCell
             
-            let movieMedia = self.movies[indexPath.row]
+            let movieMedia = self.viewModel.movies[indexPath.row]
             
             if let imagePath = movieMedia.posterPath {
-                let movieImageUrl = Constants.network.imagePath + imagePath
+                let movieImageUrl = Constants.network.defaultImagePath + imagePath
                 movieCell.movieConfigureWith(imageURL: URL(string: movieImageUrl),
                                              movieName: movieMedia.originalTitle, description: movieMedia.overview )
             }
@@ -166,9 +141,9 @@ extension MediaViewController: UITableViewDataSource{
             let cellIdentifier = String(describing: TVShowTableViewCell.self)
             let tvShowCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! TVShowTableViewCell
             
-            let tvShowMedia = self.tvShows[indexPath.row]
+            let tvShowMedia = self.viewModel.tvShows[indexPath.row]
             if let imagePath = tvShowMedia.posterPath {
-                let tvShowImageUrl = Constants.network.imagePath + imagePath
+                let tvShowImageUrl = Constants.network.defaultImagePath + imagePath
                 tvShowCell.tvShowConfigureWith(imageURL: URL(string: tvShowImageUrl),
                                                tvShowName: tvShowMedia.originalName, description: tvShowMedia.overview)
                 
@@ -197,7 +172,7 @@ extension MediaViewController: UITableViewDelegate {
             let movieIdentifier = String(describing: MovieDetailViewController.self)
             
             if let detailViewController = storyboard.instantiateViewController(identifier: movieIdentifier) as? MovieDetailViewController {
-                detailViewController.movie = self.movies[indexPath.row]
+                detailViewController.viewModel.movie = self.viewModel.movies[indexPath.row]
                 
                 self.navigationController?.pushViewController(detailViewController, animated: true)
             }
@@ -207,7 +182,7 @@ extension MediaViewController: UITableViewDelegate {
             let tvShowIdentifier = String(describing: TvShowDetailViewController.self)
             
             if let detailViewController = storyboard.instantiateViewController(identifier: tvShowIdentifier) as? TvShowDetailViewController {
-                detailViewController.tvShow = self.tvShows[indexPath.row]
+                detailViewController.tvShow = self.viewModel.tvShows[indexPath.row]
                 
                 self.navigationController?.pushViewController(detailViewController, animated: true)
             }
