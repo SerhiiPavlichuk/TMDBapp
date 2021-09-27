@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="20" reuseIdentifier="MovieTableViewCell" rowHeight="460" id="Ps9-Ha-nCB" customClass="MovieTableViewCell" customModule="MovieAdvisor" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="20" reuseIdentifier="MovieTableViewCell" rowHeight="460" id="Ps9-Ha-nCB" customClass="MovieTableViewCell" customModule="TMDb_app" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="270" height="460"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ps9-Ha-nCB" id="jZv-tJ-uSa">
@@ -23,7 +23,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="238" height="428"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H0o-TP-7vy" customClass="GradientView" customModule="MovieAdvisor" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H0o-TP-7vy" customClass="GradientView" customModule="TMDb_app" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="214" width="238" height="214"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="movieNameLabel" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TW0-9H-3C0">

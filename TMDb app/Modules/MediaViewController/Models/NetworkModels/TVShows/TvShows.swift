@@ -1,20 +1,20 @@
 import Foundation
 
 struct TvShow : Codable {
-	let firstAirDate : String?
-	let backdropPath : String?
-	let genreIds : [Int]?
-	let voteCount : Int?
-	let originalLanguage : String?
-	let voteAverage : Double?
+	var firstAirDate : String?
+	var backdropPath : String?
+	var genreIds : [Int]?
+	var voteCount : Int?
+	var originalLanguage : String?
+	var voteAverage : Double?
 	let posterPath : String?
-	let originalName : String?
-	let originCountry : [String]?
+	var originalName : String?
+	var originCountry : [String]?
 	let id : Int?
 	let name : String?
 	let overview : String?
 	let popularity : Double?
-	let mediaType : String?
+	var mediaType : String?
 
 	enum CodingKeys: String, CodingKey {
 
@@ -52,4 +52,11 @@ struct TvShow : Codable {
         mediaType = try values.decodeIfPresent(String.self, forKey: .mediaType)
 	}
 
+    init(from tvShowRealm: TvShowRealm) {
+          self.name = tvShowRealm.name
+          self.popularity = tvShowRealm.popularity
+          self.overview = tvShowRealm.overview
+          self.id = tvShowRealm.id
+          self.posterPath = tvShowRealm.posterPath
+      }
 }

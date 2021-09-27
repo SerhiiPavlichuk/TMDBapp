@@ -87,11 +87,7 @@ class MediaViewController: UIViewController {
         let tvTableViewCellIdentifier = String(describing: TVShowTableViewCell.self)
         self.tableView.register(UINib(nibName: tvTableViewCellIdentifier, bundle: nil),
                                 forCellReuseIdentifier: tvTableViewCellIdentifier)
-        
-        
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: Constants.ui.defaultCellIdentifier)
-        
-        
+                
         self.title = Constants.viewControllerTitles.media
         self.navigationController?.navigationBar.prefersLargeTitles = false
         
@@ -182,7 +178,7 @@ extension MediaViewController: UITableViewDelegate {
             let tvShowIdentifier = String(describing: TvShowDetailViewController.self)
             
             if let detailViewController = storyboard.instantiateViewController(identifier: tvShowIdentifier) as? TvShowDetailViewController {
-                detailViewController.tvShow = self.viewModel.tvShows[indexPath.row]
+                detailViewController.viewModel.tvShow = self.viewModel.tvShows[indexPath.row]
                 
                 self.navigationController?.pushViewController(detailViewController, animated: true)
             }

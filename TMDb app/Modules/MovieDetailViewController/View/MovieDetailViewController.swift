@@ -7,28 +7,19 @@
 
 import UIKit
 import SDWebImage
-import RealmSwift
-import Alamofire
-import youtube_ios_player_helper
 import SafariServices
-
+import youtube_ios_player_helper
 
 class MovieDetailViewController: UIViewController {
     
     var viewModel: MovieDetailViewModel = MovieDetailViewModel()
-    let realm = try? Realm()
-    
     
     @IBOutlet weak var posterImageView: UIImageView!
-    @IBOutlet weak var releaseDateLabel: UILabel!
-    @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var overviewLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var videoPlayerView: YTPlayerView!
     
-    
-    
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,9 +29,8 @@ class MovieDetailViewController: UIViewController {
         if let id = self.viewModel.movie?.id {
             let stringID = String(describing: id)
             self.requestVideos(with: stringID)
-
+          
         }
-        
     }
     
     func setupCollectionViewUI(){
@@ -53,15 +43,14 @@ class MovieDetailViewController: UIViewController {
         self.viewModel.loadActors(completion: {
             self.collectionView.reloadData()
         })
-        
     }
 
     func requestVideos(with movieId: String) {
 
-        self.viewModel.loadTrailer(movieId) { videoKey in
-
-        }
-    }
+           self.viewModel.loadTrailer(movieId) { videoKey in
+               self.videoPlayerView.load(withVideoId: videoKey)
+           }
+       }
     
     func setupUI() {
         
@@ -73,44 +62,45 @@ class MovieDetailViewController: UIViewController {
             self.posterImageView.sd_setImage(with: URL(string: urlString), completed: nil)
         }
         self.overviewLabel.text = self.viewModel.movie?.overview
-        self.releaseDateLabel.text = self.viewModel.movie?.releaseDate
+//        self.releaseDateLabel.text = self.viewModel.movie?.releaseDate
         
         if let movie = self.viewModel.movie {
             if let vote = movie.voteAverage {
-                self.ratingLabel.text = String(describing: vote)
+//                self.ratingLabel.text = String(describing: vote)
             }
         }
-        let addToWatchLaterBarButtonItem = UIBarButtonItem(title: "Watch Later", style: .done, target: self, action: #selector(addToWatchButtonPressed))
+        let addToWatchLaterBarButtonItem = UIBarButtonItem(title: Constants.viewControllerTitles.watchLater, style: .done, target: self, action: #selector(addToWatchLaterButtonPressed))
         self.navigationItem.rightBarButtonItem = addToWatchLaterBarButtonItem
         
         
     }
+    private func loadByKey(_ key: String) {
+           self.videoPlayerView.load(withVideoId: key)
+       }
 
+//    @IBAction func trailerButtonPressed(_ sender: Any) {
+//
+//        let url = URL(string: Constants.network.defaultYoutubePath + viewModel.video)!
+//        let config = SFSafariViewController.Configuration()
+//        config.entersReaderIfAvailable = true
+//
+//        let vc = SFSafariViewController(url: url, configuration: config)
+//        present(vc, animated: true)
+//    }
     
-    @IBAction func trailerButtonPressed(_ sender: Any) {
-        
-        let url = URL(string: Constants.network.defaultYoutubePath + viewModel.video)!
-        let config = SFSafariViewController.Configuration()
-        config.entersReaderIfAvailable = true
-        
-        let vc = SFSafariViewController(url: url, configuration: config)
-        present(vc, animated: true)
-    }
-    
-    @objc func addToWatchButtonPressed(){
-        
-        let movieRealm = MovieRealm()
-        movieRealm.title = self.viewModel.movie?.title ?? ""
-        movieRealm.popularity = self.viewModel.movie?.popularity ?? 0.0
-        movieRealm.overview = self.viewModel.movie?.overview ?? ""
-        movieRealm.id = self.viewModel.movie?.id ?? 0
-        movieRealm.backdropPath = self.viewModel.movie?.backdropPath ?? ""
-        movieRealm.mediaType = self.viewModel.movie?.mediaType ?? ""
-        movieRealm.posterPath = self.viewModel.movie?.posterPath ?? ""
-        
-        try? realm?.write {
-            realm?.add(movieRealm)
-        }
+    @objc func addToWatchLaterButtonPressed(){
+
+        self.viewModel.saveMovieInRealm(self.viewModel.movie, completion: {
+
+            let alert = UIAlertController(title: Constants.ui.movieSavedAlert,
+                                          message: nil,
+                                          preferredStyle: UIAlertController.Style.alert)
+
+            alert.addAction(UIAlertAction(title: Constants.ui.okMessage,
+                                          style: UIAlertAction.Style.default,
+                                          handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        })
     }
 }
 

@@ -22,7 +22,7 @@ struct Constants {
         static let moviePath = defaultPath + "movie"
         static let movieActorsPath = "/credits?api_key=\(apiKey)&language=en-US"
         static let trendingMoviePath = "https://api.themoviedb.org/3/trending/movie/week?api_key"
-        static let defaultImagePath = "https://image.tmdb.org/t/p/original/"
+        static let defaultImagePath = "https://image.tmdb.org/t/p/original"
         
     }
     
@@ -33,9 +33,12 @@ struct Constants {
     
     struct ui {
         static let defaultCellIdentifier = "Cell"
+        static let movieCellIdentifier = "MovieTableViewCell"
+        static let tvShowCellIdentifier = "TVShowTableViewCell"
         static let okMessage = "Cool 👌"
         static let imageView = "logo"
-        
+        static let movieSavedAlert = "Movie saved"
+        static let tvShowSavedAlert = "Show saved"
     
     }
     

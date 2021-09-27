@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 class MovieDetailViewModel {
     
     var movie: Movie? = nil
@@ -27,19 +26,6 @@ class MovieDetailViewModel {
         })
     }
     
-//    func loadTrailer(completion: @escaping(() -> ())) {
-//        MovieNetworkManager.shared.requestVideos(movieId: movie, completion: { actors in
-//            self.actorsArray = actors ?? []
-//            let dataArray = actors ?? []
-//            let actorResponce = dataArray.first
-//
-//            self.actors = actorResponce
-//            completion()
-//        })
-//    }
-    
-    
-    
     func loadTrailer(_ movieId: String, completion: @escaping((String) -> ())) {
             
         MovieNetworkManager.shared.requestVideos(movieId, completion: { videoKey in
@@ -48,6 +34,16 @@ class MovieDetailViewModel {
             completion(videoKey)
             })
         }
+    
+    func saveMovieInRealm(_ movie: Movie?, completion: @escaping(() -> ())) {
+        
+        guard let movie = movie else {
+        
+            return
+        }
+        
+        MovieDataManager.shared.saveMovie(movie, completion: completion)
+    }
 }
 
 
