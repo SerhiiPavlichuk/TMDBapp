@@ -24,8 +24,6 @@
 		844272C326B71AAF000E8320 /* TvShowRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844272C226B71AAF000E8320 /* TvShowRealm.swift */; };
 		8459AE8126FA657D00D98FCE /* Trailers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459AE7F26FA657D00D98FCE /* Trailers.swift */; };
 		8459AE8226FA657D00D98FCE /* VideoResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459AE8026FA657D00D98FCE /* VideoResult.swift */; };
-		846622F126B95320004758CA /* WatchMovieLaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846622F026B95320004758CA /* WatchMovieLaterViewController.swift */; };
-		846622F326B9CA3C004758CA /* WatchTvShowLaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846622F226B9CA3C004758CA /* WatchTvShowLaterViewController.swift */; };
 		84719ECF2700B43A0045D555 /* Cast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84719ECC2700B43A0045D555 /* Cast.swift */; };
 		84719ED02700B43A0045D555 /* CastAndCrewResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84719ECD2700B43A0045D555 /* CastAndCrewResult.swift */; };
 		84719ED12700B43A0045D555 /* Crew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84719ECE2700B43A0045D555 /* Crew.swift */; };
@@ -67,8 +65,6 @@
 		844272C226B71AAF000E8320 /* TvShowRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvShowRealm.swift; sourceTree = "<group>"; };
 		8459AE7F26FA657D00D98FCE /* Trailers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trailers.swift; sourceTree = "<group>"; };
 		8459AE8026FA657D00D98FCE /* VideoResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoResult.swift; sourceTree = "<group>"; };
-		846622F026B95320004758CA /* WatchMovieLaterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchMovieLaterViewController.swift; sourceTree = "<group>"; };
-		846622F226B9CA3C004758CA /* WatchTvShowLaterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchTvShowLaterViewController.swift; sourceTree = "<group>"; };
 		84719ECC2700B43A0045D555 /* Cast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cast.swift; sourceTree = "<group>"; };
 		84719ECD2700B43A0045D555 /* CastAndCrewResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CastAndCrewResult.swift; sourceTree = "<group>"; };
 		84719ECE2700B43A0045D555 /* Crew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Crew.swift; sourceTree = "<group>"; };
@@ -241,7 +237,6 @@
 		848DDAC226FD048C005C9B5F /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				848DDACA26FD0D3D005C9B5F /* RealmModels */,
 				848DDAC726FD050F005C9B5F /* NetworkModels */,
 			);
 			path = Models;
@@ -332,6 +327,7 @@
 		849E15EA27024E2000D9DD30 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				848DDACA26FD0D3D005C9B5F /* RealmModels */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -378,7 +374,6 @@
 				848DDABD26FD0344005C9B5F /* Managers */,
 				848DDABC26FD0312005C9B5F /* Default Files */,
 				84EBEBBA26B6D50500BF44EB /* Common */,
-				84EBEBB926B6D4C800BF44EB /* ViewControllers */,
 				8442728026B6D75C000E8320 /* Main.storyboard */,
 				84EBEBAC26B6D38F00BF44EB /* Info.plist */,
 			);
@@ -401,15 +396,6 @@
 				8442728826B6DA3F000E8320 /* TvShows.swift */,
 			);
 			path = TVShows;
-			sourceTree = "<group>";
-		};
-		84EBEBB926B6D4C800BF44EB /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				846622F226B9CA3C004758CA /* WatchTvShowLaterViewController.swift */,
-				846622F026B95320004758CA /* WatchMovieLaterViewController.swift */,
-			);
-			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		84EBEBBA26B6D50500BF44EB /* Common */ = {
@@ -549,11 +535,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8442728526B6D7D7000E8320 /* TvShowDetailViewController.swift in Sources */,
-				846622F126B95320004758CA /* WatchMovieLaterViewController.swift in Sources */,
 				84719ECF2700B43A0045D555 /* Cast.swift in Sources */,
 				848DDAC926FD0AE5005C9B5F /* TvShowNetworkManager.swift in Sources */,
 				843BF34626F78D040063E56A /* TVShowTableViewCell.swift in Sources */,
-				846622F326B9CA3C004758CA /* WatchTvShowLaterViewController.swift in Sources */,
 				849E15E6270241E200D9DD30 /* TvShowDataManager.swift in Sources */,
 				849E15E927024E0700D9DD30 /* WatchLaterViewController.swift in Sources */,
 				848DDAB326FCF62E005C9B5F /* ActorsCollectionViewCell.swift in Sources */,

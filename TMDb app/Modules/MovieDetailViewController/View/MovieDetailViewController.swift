@@ -121,7 +121,7 @@ extension MovieDetailViewController: UICollectionViewDataSource {
             
             return UICollectionViewCell()
         }
-        cell.configureWith(actorName: currentActor.name, profilePath: currentActor.profile_path)
+        cell.configureWith(actorName: currentActor.name, profilePath: currentActor.profilePath)
         return cell
     }
 }
